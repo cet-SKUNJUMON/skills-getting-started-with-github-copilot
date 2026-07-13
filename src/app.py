@@ -8,6 +8,7 @@ for extracurricular activities at Mergington High School.
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
+import uvicorn
 import os
 from pathlib import Path
 
@@ -124,3 +125,8 @@ def unregister_from_activity(activity_name: str, email: str):
     # Remove student
     activity["participants"].remove(email)
     return {"message": f"Removed {email} from {activity_name}"}
+
+
+if __name__ == "__main__":
+    # Allow `python app.py` (or `python src/app.py`) to start the API server directly.
+    uvicorn.run(app, host="0.0.0.0", port=8000)
